@@ -1,0 +1,15 @@
+---
+# defaults file for collectd
+collectd_package: "collectd"
+collectd_plugin: "write_prometheus"
+collectd_prometheus_port: 9103
+collectd_modules:
+  - df
+  - processes
+  - protocols
+  - swap
+  - tcpconns
+  - uptime
+  - users
+  - vmem
+collectd_action: "install"

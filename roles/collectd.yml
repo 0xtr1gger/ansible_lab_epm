@@ -1,0 +1,7 @@
+---
+- name: Manage Collectd Service
+  hosts: all
+  become: true
+  roles:
+    - role: collectd
+      collectd_action: "install"  # Change to "remove" to uninstall

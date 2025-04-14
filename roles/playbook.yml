@@ -1,0 +1,6 @@
+---
+- name: Configure servers with common role
+  hosts: all
+  become: true
+  roles:
+    - common

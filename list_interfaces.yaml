@@ -1,0 +1,13 @@
+# list_interfaces.yaml
+---
+- name: List Network Interfaces
+  hosts: all
+  become: true
+  tasks:
+    - name: Get network interfaces
+      ansible.builtin.shell: ip link
+      register: ip_output
+
+    - name: Print network interfaces
+      ansible.builtin.debug:
+        var: ip_output.stdout

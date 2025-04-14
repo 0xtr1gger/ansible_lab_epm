@@ -1,0 +1,26 @@
+---
+# install.yml for collectd role
+
+- name: Install collectd
+  ansible.builtin.apt:
+    name:
+      - "{{ collectd_package }}"
+    state: latest
+
+- name: Create collectd configuration directory
+  ansible.builtin.file:
+    path: /etc/collectd.d
+    state: directory
+    mode: '0755'
+
+- name: Configure write_prometheus plugin
+  ansible.builtin.template:
+    src: prometheus.conf.j2
+    dest: /etc/collectd.d/prometheus.conf
+  notify: Restart collectd
+
+- name: Enable and start collectd service
+  ansible.builtin.systemd:
+    name: collectd
+    enabled: true
+    state: started

@@ -1,0 +1,18 @@
+---
+# remove.yml for collectd role
+
+- name: Stop collectd service
+  systemd:
+    name: collectd
+    state: stopped
+
+- name: Remove collectd package
+  ansible.builtin.apt:
+    name:
+      - "{{ collectd_package }}"
+    state: absent
+
+- name: Remove collectd configuration files
+  file:
+    path: /etc/collectd.d/prometheus.conf
+    state: absent

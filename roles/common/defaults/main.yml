@@ -1,0 +1,14 @@
+---
+# defaults file for common
+install_packages: false
+disable_selinux: false
+required_packages:
+  - curl
+  - lsof
+  - mc
+  - nano
+  - tar
+  - unzip
+  - vim
+  - zip
+

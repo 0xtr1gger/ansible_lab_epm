@@ -1,0 +1,21 @@
+---
+# tasks file for common
+- include_tasks: install_packages.yml
+  when: install_packages
+
+- name: Check SELinux status
+  command: getenforce
+  register: selinux_status
+  ignore_errors: true
+
+- name: Disable SELinux
+  command: setenforce 0
+  when: '"Enforcing" in selinux_status.stdout and disable_selinux'
+  notify: Reboot
+
+- name: Ensure SELinux is in permissive mode
+  lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: 'SELINUX=permissive'
+  when: '"Enforcing" in selinux_status.stdout and disable_selinux'

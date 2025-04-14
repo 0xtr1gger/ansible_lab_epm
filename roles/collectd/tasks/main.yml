@@ -1,0 +1,10 @@
+---
+# main.yml for collectd role
+
+- name: Install collectd
+  include_tasks: install.yml
+  when: collectd_action == "install"
+
+- name: Remove collectd
+  include_tasks: remove.yml
+  when: collectd_action == "remove"
